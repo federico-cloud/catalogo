@@ -25,8 +25,28 @@ Route::get('/', function () {
 //Route::get('/peticion', [ controlador, 'metodo' ]);
 
 use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\CategoriaController;
 
-Route::get  ('/adminMarcas',    [ 
-                                    MarcaController::class, 'index' 
-                                ]
+Route::get  ('/adminMarcas',    
+                [ 
+                    MarcaController::class, 'index' 
+                ]
+            );
+
+Route::get  ('/agregarMarca',
+                [
+                    MarcaController::class, 'create'
+                ]
+            );
+
+
+#############################################
+############# CRUD CATEGORIAS ###############
+#############################################
+
+
+Route::get  ('/adminCategorias',
+                [
+                    CategoriaController::class, 'index'
+                ]
             );

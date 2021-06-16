@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marca;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class MarcaController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,14 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        //Obtenemos el listado de las marcas
-            $marcas = Marca::paginate(5);
+        //Obtenemos el listado de categorias
+            $categorias = Categoria::all();
 
-        //Retornamos la vista con el listado
+        //Retornamos vista con listado de categorias    
             return view (
-                            'adminMarcas',
+                            'adminCategorias',
                             [
-                                'marcas' => $marcas
+                                'categorias' => $categorias
                             ]
                         );
     }
@@ -34,7 +34,6 @@ class MarcaController extends Controller
     public function create()
     {
         //
-        return view ('agregarMarca');
     }
 
     /**

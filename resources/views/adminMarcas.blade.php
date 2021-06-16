@@ -23,9 +23,10 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($marcas as $marca)
                 <tr>
-                    <td>idMarca</td>
-                    <td>mkNombre</td>
+                    <td>{{$marca->idMarca}}</td>
+                    <td>{{$marca->mkNombre}}</td>
                     <td>
                         <a href="/modificarMarca" class="btn btn-outline-secondary">
                             Modificar
@@ -37,7 +38,11 @@
                         </a>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
 
+        <div style="border: none;">
+            {{$marcas->links()}}
+        </div>
     @endsection

@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+#############################################
+############### CRUD MARCAS #################
+#############################################
+
+//Route::get('/peticion', [ controlador, 'metodo' ]);
+
+use App\Http\Controllers\MarcaController;
+
+Route::get  ('/adminMarcas',    [ 
+                                    MarcaController::class, 'index' 
+                                ]
+            );

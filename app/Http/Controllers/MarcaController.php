@@ -37,6 +37,18 @@ class MarcaController extends Controller
         return view ('agregarMarca');
     }
 
+    private function validarForm(Request $request)
+    {
+        $request = $request
+                        ->validate  (
+                                        [
+                                            'mkNombre' => 'required | min:2'
+                                        ]
+                                    );
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -45,7 +57,14 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Caputramos el dato del formulario agregarMarca
+            $mkNombre = $request -> mkNombre;
+        //Validamos el dato
+            $this->validarForm($request);
+        //Instanciacion, asignacion, guardar el
+
+        //Redireccion mas mensajes
+            return 'Retornamos validacion';
     }
 
     /**

@@ -39,6 +39,11 @@ Route::get  ('/agregarMarca',
                 ]
             );
 
+Route::get  ('/agregarMarca',
+                [
+                    MarcaController::class, 'store'
+                ]
+            );
 
 #############################################
 ############# CRUD CATEGORIAS ###############
@@ -48,5 +53,11 @@ Route::get  ('/agregarMarca',
 Route::get  ('/adminCategorias',
                 [
                     CategoriaController::class, 'index'
+                ]
+            );
+
+Route::get  ('/agregarCategoria',
+                [
+                    CategoriaController::class, 'create'
                 ]
             );

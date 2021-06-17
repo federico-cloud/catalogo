@@ -15,7 +15,7 @@ class MarcaController extends Controller
     public function index()
     {
         //Obtenemos el listado de las marcas
-            $marcas = Marca::paginate(5);
+            $marcas = Marca::all();
 
         //Retornamos la vista con el listado
             return view (
@@ -66,9 +66,16 @@ class MarcaController extends Controller
         //Validamos el dato
             $this->validarForm($request);
         //Instanciacion, asignacion, guardar el
-
+            $Marca = new Marca;
+            $Marca -> mkNombre = $mkNombre;
+            $Marca -> save();
         //Redireccion mas mensajes
-            return 'Retornamos validacion';
+            return redirect('adminMarcas')
+                                ->with   (
+                                            [
+                                                'mensaje' => 'Marca: '.$mkNombre.' dada de alta correctamente'
+                                            ]
+                                        );
     }
 
     /**

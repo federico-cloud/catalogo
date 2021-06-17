@@ -10,8 +10,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="mkNombre">Nombre de la marca</label>
-                    <input type="text" name="mkNombre"
-                    class="form-control" id="mkNombre">
+                    <input type="text" name="mkNombre" value="{{old('mkNombre')}}"class="form-control" id="mkNombre">
                 </div>
                 <button class="btn btn-dark mr-3">Agregar marca</button>
                 <a href="/adminMarcas" class="btn btn-outline-secondary">

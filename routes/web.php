@@ -39,7 +39,7 @@ Route::get  ('/agregarMarca',
                 ]
             );
 
-Route::get  ('/agregarMarca',
+Route::post  ('/agregarMarca',
                 [
                     MarcaController::class, 'store'
                 ]

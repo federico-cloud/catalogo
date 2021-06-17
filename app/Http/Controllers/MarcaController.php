@@ -43,6 +43,10 @@ class MarcaController extends Controller
                         ->validate  (
                                         [
                                             'mkNombre' => 'required | min:2'
+                                        ],
+                                        [
+                                            'mkNombre.required' => "El nombre de la marca egis obligatorio",
+                                            'mkNombre.min' => "El nombre de la marca debe tener al menos 2 caracteres"    
                                         ]
                                     );
     }

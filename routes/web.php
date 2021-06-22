@@ -61,3 +61,9 @@ Route::get  ('/agregarCategoria',
                     CategoriaController::class, 'create'
                 ]
             );
+
+Route::post ('/agregarCategoria',
+                [
+                    CategoriaController::class, 'store'
+                ]   
+            );

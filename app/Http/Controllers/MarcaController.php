@@ -45,8 +45,8 @@ class MarcaController extends Controller
                                             'mkNombre' => 'required | min:2'
                                         ],
                                         [
-                                            'mkNombre.required' => "El nombre de la marca egis obligatorio",
-                                            'mkNombre.min' => "El nombre de la marca debe tener al menos 2 caracteres"    
+                                            'mkNombre.required' =>  "El nombre de la marca egis obligatorio",
+                                            'mkNombre.min'      =>  "El nombre de la marca debe tener al menos 2 caracteres"    
                                         ]
                                     );
     }
@@ -65,7 +65,7 @@ class MarcaController extends Controller
             $mkNombre = $request -> mkNombre;
         //Validamos el dato
             $this->validarForm($request);
-        //Instanciacion, asignacion, guardar el
+        //Instanciacion, asignacion, guardar dato
             $Marca = new Marca;
             $Marca -> mkNombre = $mkNombre;
             $Marca -> save();

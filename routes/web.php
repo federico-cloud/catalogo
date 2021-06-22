@@ -16,3 +16,48 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+#############################################
+############### CRUD MARCAS #################
+#############################################
+
+//Route::get('/peticion', [ controlador, 'metodo' ]);
+
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\CategoriaController;
+
+Route::get  ('/adminMarcas',    
+                [ 
+                    MarcaController::class, 'index' 
+                ]
+            );
+
+Route::get  ('/agregarMarca',
+                [
+                    MarcaController::class, 'create'
+                ]
+            );
+
+Route::post  ('/agregarMarca',
+                [
+                    MarcaController::class, 'store'
+                ]
+            );
+
+#############################################
+############# CRUD CATEGORIAS ###############
+#############################################
+
+
+Route::get  ('/adminCategorias',
+                [
+                    CategoriaController::class, 'index'
+                ]
+            );
+
+Route::get  ('/agregarCategoria',
+                [
+                    CategoriaController::class, 'create'
+                ]
+            );

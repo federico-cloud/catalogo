@@ -45,6 +45,18 @@ Route::post  ('/agregarMarca',
                 ]
             );
 
+Route::get  ('/modificarMarca/{idMarca}',
+                [
+                    MarcaController::class, 'edit'
+                ]
+            );
+
+Route::put  ('/modificarMarca',
+                [
+                    MarcaController::class, 'update'
+                ]
+            );
+
 #############################################
 ############# CRUD CATEGORIAS ###############
 #############################################

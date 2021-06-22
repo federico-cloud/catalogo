@@ -39,6 +39,22 @@ class CategoriaController extends Controller
                     );
     }
 
+
+    private function validarForm(Request $request)
+    {
+        $request = $request
+                        ->validate  (
+                                        [    
+                                            'catNombre' => 'required | min:5'
+                                        ],
+                                        [
+                                            'catNombre.min'         =>  'El nombre de la categoria debe tener al menos 5 caracteres.',
+                                            'catNombre.required'    =>  'El nombre de la categoria es obligatorio.'
+                                        ]
+                                    
+                                    );
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,7 +63,21 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Capturamos el dato del formulario
+            $catNombre = $request->catNombre;
+        //Validamos el dato del formulario
+            $this->validarForm($request);
+        //Instanciacion, asignacion y guardar el objeto
+            $Categoria = new Categoria;
+            $Categoria -> catNombre = $catNombre;
+            $Categoria -> save();
+        //Redireccion con mensaje
+            return redirect ('adminCategorias')
+                                ->with  (
+                                            [
+                                                'mensaje' => 'Categoria: '.$catNombre.' dada de alta correctamente'
+                                            ]
+                                        );
     }
 
     /**

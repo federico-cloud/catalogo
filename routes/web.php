@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 #############################################
 ############### CRUD MARCAS #################
 #############################################
@@ -25,63 +20,29 @@ Route::get('/', function () {
 //Route::get('/peticion', [ controlador, 'metodo' ]);
 
 use App\Http\Controllers\MarcaController;
-use App\Http\Controllers\CategoriaController;
 
-Route::get  ('/adminMarcas',    
-                [ 
-                    MarcaController::class, 'index' 
-                ]
-            );
+Route::get('/adminMarcas', [MarcaController::class, 'index']);
 
-Route::get  ('/agregarMarca',
-                [
-                    MarcaController::class, 'create'
-                ]
-            );
+Route::get('/agregarMarca', [MarcaController::class, 'create']);
 
-Route::post  ('/agregarMarca',
-                [
-                    MarcaController::class, 'store'
-                ]
-            );
+Route::post('/agregarMarca', [MarcaController::class, 'store']);
 
-Route::get  ('/modificarMarca/{idMarca}',
-                [
-                    MarcaController::class, 'edit'
-                ]
-            );
+Route::get('/modificarMarca/{idMarca}', [MarcaController::class, 'edit']);
 
-Route::put('/modificarMarca',
-                [
-                    MarcaController::class, 'update'
-                ]
-);
+Route::put('/modificarMarca', [MarcaController::class, 'update']);
 
-Route::get('/eliminarMarca/{idMarca}',
-                [
-                    MarcaController::class, 'confirmarBaja'
-                ]   
-);
+Route::get('/eliminarMarca/{idMarca}', [MarcaController::class, 'confirmarBaja']);
 
 #############################################
 ############# CRUD CATEGORIAS ###############
 #############################################
 
+use App\Http\Controllers\CategoriaController;
 
-Route::get  ('/adminCategorias',
-                [
-                    CategoriaController::class, 'index'
-                ]
-            );
+Route::get('/adminCategorias',[CategoriaController::class, 'index']);
 
-Route::get  ('/agregarCategoria',
-                [
-                    CategoriaController::class, 'create'
-                ]
-            );
+Route::get('/agregarCategoria', [CategoriaController::class, 'create']);
 
-Route::post ('/agregarCategoria',
-                [
-                    CategoriaController::class, 'store'
-                ]   
-            );
+Route::post('/agregarCategoria', [CategoriaController::class, 'store']);
+
+Route::get('/modificarCategoria/{idCategoria}', [CategoriaController::class, 'edit']);

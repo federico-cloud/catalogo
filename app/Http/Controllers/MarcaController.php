@@ -135,6 +135,27 @@ class MarcaController extends Controller
                         );
     }
 
+    private function productoPorMarca($idMarca)
+    {
+        //$check = Producto::where('idMarca', $idMarca)->first();
+        //$check = Producto::fiirstWhere('idMarca', $idMarca);
+        $check = Producto::where('idMarca')->count();
+        return $check;
+    }
+
+    public function confirmarBaja() 
+    {
+        //Obtenemos datos de una marca por ID
+            $Marca::find($idMarca);
+        ## chequear si no hay un producto de esa marca
+        if($this->productoPorMarca($idMarca) == 0)
+        {
+            //Retornar vista con datos de la confirmacion
+            return 'vista con datos para la confirmacion de la baja';
+        }
+        return 'redireccion con mensaje que no se puede borrar';
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -51,11 +51,17 @@ Route::get  ('/modificarMarca/{idMarca}',
                 ]
             );
 
-Route::put  ('/modificarMarca',
+Route::put('/modificarMarca',
                 [
                     MarcaController::class, 'update'
                 ]
-            );
+);
+
+Route::get('/eliminarMarca/{idMarca}',
+                [
+                    MarcaController::class, 'confirmarBaja'
+                ]   
+);
 
 #############################################
 ############# CRUD CATEGORIAS ###############

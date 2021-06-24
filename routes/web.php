@@ -46,3 +46,5 @@ Route::get('/agregarCategoria', [CategoriaController::class, 'create']);
 Route::post('/agregarCategoria', [CategoriaController::class, 'store']);
 
 Route::get('/modificarCategoria/{idCategoria}', [CategoriaController::class, 'edit']);
+
+Route::put('/modificarCategoria', [CategoriaController::class, 'update']);

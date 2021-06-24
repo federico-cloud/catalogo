@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller
@@ -98,13 +99,13 @@ class MarcaController extends Controller
     public function edit($idMarca)
     {
         //Obtenemos datos de una marca
-            $Marca = Marca::find($idMarca);
+        $Marca = Marca::find($idMarca);
         //Retornamos vista con datos
-            return view ('modificarMarca',
-                            [
-                                'Marca' => $Marca
-                            ]
-                        );
+        return view ('modificarMarca',
+                        [
+                            'Marca' => $Marca
+                        ]
+        );
     }
 
     /**
@@ -117,22 +118,22 @@ class MarcaController extends Controller
     public function update(Request $request)
     {
         //Caputramos datos
-            $mkNombre = $request-> mkNombre;
+        $mkNombre = $request-> mkNombre;
         //Validacion
-            $this->validarForm($request);
+        $this->validarForm($request);
         //Obtenemos una marca por su ID
-            $Marca = Marca::find($request->idMarca);
+        $Marca = Marca::find($request->idMarca);
         //Modificamos los/el atributos 
-            $Marca->mkNombre = $mkNombre;
+        $Marca->mkNombre = $mkNombre;
         //Guardar
-            $Marca->save();
+        $Marca->save();
         //Redirigmos con el mensaje ok
-            return redirect('adminMarcas')
-                ->with  (
-                            [
-                                'mensaje' => 'Marca: '.$mkNombre.' modificada correctamente'
-                            ]
-                        );
+        return redirect('adminMarcas')
+                                        ->with(
+                                                [
+                                                    'mensaje' => 'Marca: '.$mkNombre.' modificada correctamente.'
+                                                ]
+                                        );
     }
 
     private function productoPorMarca($idMarca)
@@ -140,13 +141,15 @@ class MarcaController extends Controller
         //$check = Producto::where('idMarca', $idMarca)->first();
         //$check = Producto::fiirstWhere('idMarca', $idMarca);
         $check = Producto::where('idMarca')->count();
+        dd($check);
         return $check;
     }
 
-    public function confirmarBaja() 
+    public function confirmarBaja($idMarca) 
     {
         //Obtenemos datos de una marca por ID
-            $Marca::find($idMarca);
+        $Marca = Marca::find($idMarca);
+        
         ## chequear si no hay un producto de esa marca
         if($this->productoPorMarca($idMarca) == 0)
         {

@@ -15,15 +15,10 @@ class CategoriaController extends Controller
     public function index()
     {
         //Obtenemos el listado de categorias
-            $categorias = Categoria::all();
+        $categorias = Categoria::all();
 
         //Retornamos vista con listado de categorias    
-            return view (
-                            'adminCategorias',
-                            [
-                                'categorias' => $categorias
-                            ]
-                        );
+        return view('adminCategorias',['categorias' => $categorias]);
     }
 
     /**
@@ -33,10 +28,8 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
-        return view (
-                    'agregarCategoria'
-                    );
+        //Retornamos vista
+        return view ('agregarCategoria');
     }
 
 
@@ -44,15 +37,14 @@ class CategoriaController extends Controller
     {
         $request = $request
                         ->validate  (
-                                        [    
-                                            'catNombre' => 'required | min:5'
-                                        ],
                                         [
-                                            'catNombre.min'         =>  'El nombre de la categoria debe tener al menos 5 caracteres.',
-                                            'catNombre.required'    =>  'El nombre de la categoria es obligatorio.'
+                                                'catNombre'             =>  'required | min:2'
+                                        ],
+                                        [   
+                                                'catNombre.required'    =>  'El nombre de la categoria es obligatorio.',
+                                                'catNombre.min'         =>  'El nombre de la categoria debe tener al menos 2 caracteres.'
                                         ]
-                                    
-                                    );
+        );
     }
 
     /**
@@ -64,20 +56,20 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         //Capturamos el dato del formulario
-            $catNombre = $request->catNombre;
+        $catNombre = $request->catNombre;
         //Validamos el dato del formulario
-            $this->validarForm($request);
+        $this->validarForm($request);
         //Instanciacion, asignacion y guardar el objeto
-            $Categoria = new Categoria;
-            $Categoria -> catNombre = $catNombre;
-            $Categoria -> save();
+        $Categoria = new Categoria;
+        $Categoria -> catNombre = $catNombre;
+        $Categoria -> save();
         //Redireccion con mensaje
-            return redirect ('adminCategorias')
-                                ->with  (
-                                            [
-                                                'mensaje' => 'Categoria: '.$catNombre.' dada de alta correctamente'
-                                            ]
-                                        );
+        return redirect ('adminCategorias')
+                                            ->with(
+                                                    [
+                                                        'mensaje'   =>    'Categoria: '.$catNombre.' dada de alta correctamente'
+                                                    ]
+                                            );
     }
 
     /**
@@ -97,9 +89,12 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idCategoria)
     {
-        //
+        //Obtenemos los datos de una categoria por ID
+        $Categoria = Categoria::find($idCategoria);
+        //Devolvemos la vista el dato
+        return view('modificarCategoria',['Categoria' =>  $Categoria]);
     }
 
     /**
@@ -109,9 +104,25 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //Capturar los datos del formulario
+        $catNombre = $request->catNombre;
+        //Validar datos
+        $this->validarForm($request);
+        //Obtenemos el registro a modificar
+        $Categoria = Categoria::find($request->idCategoria);
+        //Modificamos el/los atributos
+        $Categoria -> catNombre = $catNombre;
+        //Guardar datos
+        $Categoria->save();
+        //Redirigimos con el mensaje OK
+        return redirect('adminCategorias')
+                                    ->with(
+                                            [
+                                                'mensaje' => 'Categoria: '.$catNombre.' fue modificada correctamente.'
+                                            ]
+                                    );
     }
 
     /**

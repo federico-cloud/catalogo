@@ -33,6 +33,8 @@ Route::put('/modificarMarca', [MarcaController::class, 'update']);
 
 Route::get('/eliminarMarca/{idMarca}', [MarcaController::class, 'confirmarBaja']);
 
+Route::delete('/eliminarMarca', [MarcaController::class, 'destroy']);
+
 #############################################
 ############# CRUD CATEGORIAS ###############
 #############################################
@@ -48,3 +50,11 @@ Route::post('/agregarCategoria', [CategoriaController::class, 'store']);
 Route::get('/modificarCategoria/{idCategoria}', [CategoriaController::class, 'edit']);
 
 Route::put('/modificarCategoria', [CategoriaController::class, 'update']);
+
+#############################################
+############# CRUD PRODUCTOS ################
+#############################################
+
+use App\Http\Controllers\ProductoController;
+
+Route::get('/adminProductos', [ProductoController::class, 'index']);

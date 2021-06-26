@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller
@@ -15,15 +16,15 @@ class MarcaController extends Controller
     public function index()
     {
         //Obtenemos el listado de las marcas
-            $marcas = Marca::all();
+        $marcas = Marca::all();
 
         //Retornamos la vista con el listado
-            return view (
-                            'adminMarcas',
-                            [
-                                'marcas' => $marcas
-                            ]
-                        );
+        return view(
+            'adminMarcas',
+            [
+                'marcas' => $marcas
+            ]
+        );
     }
 
     /**
@@ -34,21 +35,21 @@ class MarcaController extends Controller
     public function create()
     {
         //
-        return view ('agregarMarca');
+        return view('agregarMarca');
     }
 
     private function validarForm(Request $request)
     {
         $request = $request
-                        ->validate  (
-                                        [
-                                            'mkNombre' => 'required | min:2'
-                                        ],
-                                        [
-                                            'mkNombre.required' =>  "El nombre de la marca egis obligatorio",
-                                            'mkNombre.min'      =>  "El nombre de la marca debe tener al menos 2 caracteres"    
-                                        ]
-                                    );
+            ->validate(
+                [
+                    'mkNombre' => 'required | min:2'
+                ],
+                [
+                    'mkNombre.required' =>  "El nombre de la marca egis obligatorio",
+                    'mkNombre.min'      =>  "El nombre de la marca debe tener al menos 2 caracteres"
+                ]
+            );
     }
 
 
@@ -62,20 +63,20 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         //Caputramos el dato del formulario agregarMarca
-            $mkNombre = $request -> mkNombre;
+        $mkNombre = $request->mkNombre;
         //Validamos el dato
-            $this->validarForm($request);
+        $this->validarForm($request);
         //Instanciacion, asignacion, guardar dato
-            $Marca = new Marca;
-            $Marca -> mkNombre = $mkNombre;
-            $Marca -> save();
+        $Marca = new Marca;
+        $Marca->mkNombre = $mkNombre;
+        $Marca->save();
         //Redireccion mas mensajes
-            return redirect('adminMarcas')
-                                ->with   (
-                                            [
-                                                'mensaje' => 'Marca: '.$mkNombre.' dada de alta correctamente'
-                                            ]
-                                        );
+        return redirect('adminMarcas')
+            ->with(
+                [
+                    'mensaje' => 'Marca: ' . $mkNombre . ' dada de alta correctamente'
+                ]
+            );
     }
 
     /**
@@ -98,13 +99,14 @@ class MarcaController extends Controller
     public function edit($idMarca)
     {
         //Obtenemos datos de una marca
-            $Marca = Marca::find($idMarca);
+        $Marca = Marca::find($idMarca);
         //Retornamos vista con datos
-            return view ('modificarMarca',
-                            [
-                                'Marca' => $Marca
-                            ]
-                        );
+        return view(
+            'modificarMarca',
+            [
+                'Marca' => $Marca
+            ]
+        );
     }
 
     /**
@@ -117,43 +119,47 @@ class MarcaController extends Controller
     public function update(Request $request)
     {
         //Caputramos datos
-            $mkNombre = $request-> mkNombre;
+        $mkNombre = $request->mkNombre;
         //Validacion
-            $this->validarForm($request);
+        $this->validarForm($request);
         //Obtenemos una marca por su ID
-            $Marca = Marca::find($request->idMarca);
+        $Marca = Marca::find($request->idMarca);
         //Modificamos los/el atributos 
-            $Marca->mkNombre = $mkNombre;
+        $Marca->mkNombre = $mkNombre;
         //Guardar
-            $Marca->save();
+        $Marca->save();
         //Redirigmos con el mensaje ok
-            return redirect('adminMarcas')
-                ->with  (
-                            [
-                                'mensaje' => 'Marca: '.$mkNombre.' modificada correctamente'
-                            ]
-                        );
+        return redirect('adminMarcas')
+            ->with(
+                [
+                    'mensaje' => 'Marca: ' . $mkNombre . ' modificada correctamente.'
+                ]
+            );
     }
 
     private function productoPorMarca($idMarca)
     {
-        //$check = Producto::where('idMarca', $idMarca)->first();
-        //$check = Producto::fiirstWhere('idMarca', $idMarca);
-        $check = Producto::where('idMarca')->count();
+         //$check = Producto::where('idMarca', $idMarca)->first();
+        //$check = Producto::firstWhere('idMarca', $idMarca);
+        $check = Producto::where('idMarca', $idMarca)->count();
         return $check;
     }
 
-    public function confirmarBaja() 
+    public function confirmarBaja($idMarca)
     {
-        //Obtenemos datos de una marca por ID
-            $Marca::find($idMarca);
-        ## chequear si no hay un producto de esa marca
-        if($this->productoPorMarca($idMarca) == 0)
+        //obtener datos de una marca por su id
+        $Marca = Marca::find($idMarca);
+        ## chequear si NO hay productos e ese marca
+        if ( $this->productoPorMarca($idMarca) == 0 )
         {
-            //Retornar vista con datos de la confirmacion
-            return 'vista con datos para la confirmacion de la baja';
+            //retornamos vista para confirmar baja
+            return view('eliminarMarca',[ 'Marca' => $Marca ]);
         }
-        return 'redireccion con mensaje que no se puede borrar';
+        return redirect('/adminMarcas')
+                            ->with([
+                                'mensaje'   => 'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.',
+                                'clase'     => 'danger'
+                            ]);
     }
 
     /**
@@ -162,8 +168,19 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $idMarca    =   $request  ->   idMarca;
+        $mkNombre   =   $request  ->   mkNombre; 
+        //Marca::where('idMarca', $idMarca)->delete();
+        Marca::destroy($idMarca);
+        
+        return redirect('adminMarcas')
+                            ->with(
+                                    [
+                                        'mensaje' => 'Marca: ' . $mkNombre . ' modificada correctamente.'
+                                    ]
+                            );
     }
 }

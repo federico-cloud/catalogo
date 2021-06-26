@@ -14,8 +14,16 @@ class ProductoController extends Controller
      */
     public function index()
     {
+        $productos = Producto::with('relMarca')->paginate(6);
+
+        //Obtenemos los datos con los productos
+        $productos = Producto::paginate(6);
+
         //
-    }
+
+        //Retornamos la vista con la lista de productos
+        return view('adminProductos', ['productos' => $productos]);
+    }   
 
     /**
      * Show the form for creating a new resource.

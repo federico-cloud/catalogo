@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Marca;
 use App\Models\Producto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -30,7 +32,15 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        //obtenemos listado de marcas y categorias
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        //retornamos vista
+        return view('agregarProducto', [
+                                            'marcas' => $marcas,
+                                            'categorias' => $categorias
+                                        ]
+        );
     }
 
     /**

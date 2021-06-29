@@ -58,3 +58,5 @@ Route::put('/modificarCategoria', [CategoriaController::class, 'update']);
 use App\Http\Controllers\ProductoController;
 
 Route::get('/adminProductos', [ProductoController::class, 'index']);
+
+Route::get('/agregarProducto', [ProductoController::class, 'create']);

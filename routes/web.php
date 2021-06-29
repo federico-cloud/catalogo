@@ -51,6 +51,10 @@ Route::get('/modificarCategoria/{idCategoria}', [CategoriaController::class, 'ed
 
 Route::put('/modificarCategoria', [CategoriaController::class, 'update']);
 
+Route::get('/eliminarCategoria/{idCategoria}', [CategoriaController::class, 'confirmarBaja']);
+
+Route::delete('/eliminarCategoria', [CategoriaController::class, 'destroy']);
+
 #############################################
 ############# CRUD PRODUCTOS ################
 #############################################

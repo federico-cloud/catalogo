@@ -156,10 +156,12 @@ class MarcaController extends Controller
             return view('eliminarMarca',[ 'Marca' => $Marca ]);
         }
         return redirect('/adminMarcas')
-                            ->with([
-                                'mensaje'   => 'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.',
-                                'clase'     => 'danger'
-                            ]);
+                            ->with(
+                                    [
+                                        'mensaje'   => 'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.',
+                                        'clase'     => 'danger'
+                                    ]
+                            );
     }
 
     /**
@@ -179,7 +181,7 @@ class MarcaController extends Controller
         return redirect('adminMarcas')
                             ->with(
                                     [
-                                        'mensaje' => 'Marca: ' . $mkNombre . ' modificada correctamente.'
+                                        'mensaje' => 'Marca: ' . $mkNombre . ' eliminada correctamente.'
                                     ]
                             );
     }

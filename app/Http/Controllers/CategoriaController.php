@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -125,14 +126,52 @@ class CategoriaController extends Controller
                                     );
     }
 
+    private function productoPorCategoria($idProducto)
+    {
+        //Obtenemos la cantidad de productos relacionados a la categoria
+        $check = Producto::where('idProducto', $idProducto)->count();
+        return $check;
+    }
+
+
+    public function confirmarBaja($idCategoria)
+    {
+        //Obtenemos los datos de la categoria por ID
+        $Categoria = Categoria::find($idCategoria);
+        //Verificamos si hay productos en la categoria
+        if ( $this->productoPorCategoria($idCategoria) == 0)
+        {
+            //Si no hay productos dentro de la cateegoria, la eliminamos
+            return view('eliminarCategoria', ['Categoria' => $Categoria]);
+        } 
+            return redirect('adminCategorias')
+                                    ->with(
+                                            [
+                                                'mensaje'   => 'No se puede eliminar la cateogria '.$Categoria->catNombre.' ya que tiene productos relacionados',
+                                                'clase'     => 'danger'
+                                            ]
+                                    );
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        //Capturamos datos para hacer el delete y tomamos el nombre para el mensaje
+        $catNombre      =   $request->catNombre;
+        $idCategoria    =   $request->idCategoria;
+        //Hacemos el delete con el id
+        Categoria::delete($idCategoria);
+        //Retornamos la vista con mensaje de OK
+        return view('adminCategorias')
+                                ->with(
+                                        [
+                                            'mensaje' => 'La categoria: '.$catNombre.' fue eliminada correctamente'
+                                        ]
+                                );
     }
 }

@@ -16,7 +16,7 @@
                     <input type="text" name="mkNombre" value="{{old('mkNombre', $Marca->mkNombre)}}"class="form-control" id="mkNombre">
                 </div>
                 <button class="btn btn-dark mr-3">Modificar marca</button>
-                <a href="/modificarMarca" class="btn btn-outline-secondary">
+                <a href="/adminMarcas" class="btn btn-outline-secondary">
                     Volver a panel
                 </a>
             </form>

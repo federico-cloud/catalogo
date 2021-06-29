@@ -15,7 +15,7 @@
                     <input type="text" name="catNombre" value="{{old('catNombre', $Categoria->catNombre)}}" class="form-control" id="catNombre">
                 </div>
                 <button class="btn btn-dark mr-3">Modificar categoria</button>
-                <a href="/modificarMarca" class="btn btn-outline-secondary">
+                <a href="/adminCategorias" class="btn btn-outline-secondary">
                     Volver a panel de categorias
                 </a>
             </form>

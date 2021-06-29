@@ -27,14 +27,14 @@
                 </tr>
             </thead>
             <tbody>
-        @foreach ($productos -> $producto)
+        @foreach ($productos as $producto)
                 <tr>
-                    <td>    {{$productos->prdNombre}}                   </td>
-                    <td>    {{$productos->relMarca->mkNombre}}          </td>
-                    <td>    {{$productos->relCategoria->catNombre}}     </td>
-                    <td>    {{$productos->prdPrecio}}                   </td>
-                    <td>    {{$productos->prdPresentacion}}             </td>
-                    <td>    {{$productos->prdImagen}}                   </td>
+                    <td>                {{$producto->prdNombre}}                                            </td>
+                    <td>                {{$producto->relMarca->mkNombre}}                                   </td>
+                    <td>                {{$producto->relCategoria->catNombre}}                              </td>
+                    <td>                {{$producto->prdPrecio}}                                            </td>
+                    <td>                {{$producto->prdPresentacion}}                                      </td>
+                    <td>                <img style="width: 200px; height: 200px;"src="productos/{{$producto->prdImagen}}" alt="No disponible">  </td>
                     <td>    
                         <a href="/modificarProducto" class="btn btn-outline-secondary">
                             Modificar
@@ -46,8 +46,7 @@
                         </a>
                     </td>
                 </tr>
-            
-
+        @endforeach
             </tbody>
         </table>
 

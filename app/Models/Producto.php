@@ -25,7 +25,11 @@ class Producto extends Model
 
     public function relCategoria()
     {
-
+        return $this->belongsTo(
+                                    Categoria::class,
+                                    'idCategoria',
+                                    'idCategoria'
+        );
     }
 }
 

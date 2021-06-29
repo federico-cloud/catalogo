@@ -34,14 +34,14 @@
                     <td>                {{$producto->relCategoria->catNombre}}                              </td>
                     <td>                {{$producto->prdPrecio}}                                            </td>
                     <td>                {{$producto->prdPresentacion}}                                      </td>
-                    <td>                <img style="width: 200px; height: 200px;"src="productos/{{$producto->prdImagen}}" alt="No disponible">  </td>
+                    <td>                <img class="img-thumbnail" src="productos/{{$producto->prdImagen}}" alt="No disponible">  </td>
                     <td>    
-                        <a href="/modificarProducto" class="btn btn-outline-secondary">
+                        <a href="/modificarProducto/{{$producto->idProducto}}" class="btn btn-outline-secondary">
                             Modificar
                         </a>
                     </td>
                     <td>
-                        <a href="/eliminarProducto" class="btn btn-outline-secondary">
+                        <a href="/eliminarProducto/{{$producto->idProducto}}" class="btn btn-outline-secondary">
                             Eliminar
                         </a>
                     </td>
@@ -50,5 +50,6 @@
             </tbody>
         </table>
 
+        {{$productos->Links()}}
 
     @endsection

@@ -17,7 +17,7 @@ class ProductoController extends Controller
         $productos = Producto::with('relMarca','relCategoria')->paginate(6);
 
         //Obtenemos los datos con los productos
-        $productos = Producto::paginate(6);
+        $productos = Producto::paginate(4);
 
         //Retornamos la vista con la lista de productos
         return view('adminProductos', ['productos' => $productos]);

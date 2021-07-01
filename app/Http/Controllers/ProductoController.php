@@ -83,8 +83,14 @@ class ProductoController extends Controller
         //Si no envian un archivo
         $prdImagen = 'noDisponible.jpg';
         //Si enviaron una imagen SUBIR ARCHIVO
+        if ($request->file('prdImagen'))
+        {
             //renombrar
+            $ext = $request->file('prdImagen')->extension();
+            $prdImagen = time().'.'.$ext;
             //subir
+            $request->file('prdImagen')->move(public_path('productos/'), $prdImagen);
+        }
         return $prdImagen;
     }
 
@@ -100,8 +106,22 @@ class ProductoController extends Controller
         $this->validarForm($request);
         //Subir Imagen
         $prdImagen = $this->subirImagen($request);
+        //Instanciar, asignar, guardar
+        $Producto = new Producto;
 
-        return 'Imagen: '.$prdImagen;
+        $Producto->prdNombre = $prdNombre;
+        $Producto->prdPrecio = $request->prdPrecio;
+        $Producto->idMarca = $request->idMarca;
+        $Producto->idCategoria = $request->idCategoria;
+        $Producto->prdPresentacion = $request->prdPresentacion;
+        $Producto->prdStock = $request->prdStock;
+
+        return redirect('adminProductos')
+                                ->with(
+                                        [
+                                            'mensaje' => 'Producto '.$prdNombre.' agregado con exito',
+                                        ]
+                                );
 
     }
 

@@ -110,12 +110,12 @@ class ProductoController extends Controller
         //Instanciar, asignar, guardar
         $Producto = new Producto;
 
-        $Producto->prdNombre = $prdNombre;
-        $Producto->prdPrecio = $request->prdPrecio;
-        $Producto->idMarca = $request->idMarca;
-        $Producto->idCategoria = $request->idCategoria;
-        $Producto->prdPresentacion = $request->prdPresentacion;
-        $Producto->prdStock = $request->prdStock;
+        $Producto->prdNombre        =   $prdNombre;
+        $Producto->prdPrecio        =   $request->prdPrecio;
+        $Producto->idMarca          =   $request->idMarca;
+        $Producto->idCategoria      =   $request->idCategoria;
+        $Producto->prdPresentacion  =   $request->prdPresentacion;
+        $Producto->prdStock         =   $request->prdStock;
 
         $Producto->save();
 
@@ -145,9 +145,20 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($idProducto)
     {
-        //
+        //Obtenemos los datos de la marca, categorias y marcas
+        $Producto = Producto::with('relMarca', 'relCategoria')
+                                                            ->find($idProducto);
+        $categorias = Categoria::all();
+        $marcas = Marca::all();
+        return view('modificarProducto', [
+                                            'Producto'      =>  $Producto,
+                                            'categorias'    =>  $categorias,
+                                            'marcas'        =>  $marcas
+                                        ]
+        );
+
     }
 
     /**
@@ -157,9 +168,11 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request)
     {
         //
+        $this->validarForm($request);
+        $this->subirImagen($request);
     }
 
     /**

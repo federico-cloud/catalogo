@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <header class="bg-dark mb-3 shadow-sm border-bottom border-light">
+    <header class="bg-dark">
 
         <nav class="container navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="#">{{ env('APP_NAME') }}</a>
@@ -22,8 +22,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav m-auto">
-                    <a class="nav-item nav-link ml-4" href="#">Inicio</a>
+                <div class="navbar-nav m-auto bg-dark" >
+                    <a class="nav-item nav-link" href="#">Inicio</a>
                     <a class="nav-item nav-link" href="/adminMarcas">Marcas</a>
                     <a class="nav-item nav-link" href="/adminCategorias">Categorias</a>
                     <a class="nav-item nav-link" href="/adminProductos">Productos</a>

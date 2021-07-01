@@ -1,6 +1,6 @@
 
     <footer class="bg-dark fixed-bottom text-light text-center">
-        (ɔ) 2020 - Pandemic Warriors -
+        (c) 2021 - Federico Galan -
     </footer>
 
 

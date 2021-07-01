@@ -102,6 +102,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        $prdNombre = $request->prdNombre;
         //Validacion
         $this->validarForm($request);
         //Subir Imagen
@@ -115,6 +116,8 @@ class ProductoController extends Controller
         $Producto->idCategoria = $request->idCategoria;
         $Producto->prdPresentacion = $request->prdPresentacion;
         $Producto->prdStock = $request->prdStock;
+
+        $Producto->save();
 
         return redirect('adminProductos')
                                 ->with(

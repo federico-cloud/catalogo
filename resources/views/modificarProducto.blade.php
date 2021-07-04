@@ -10,6 +10,7 @@
             <form action="/modificarProducto" method="post" enctype="multipart/form-data">
                 @method('put')
                 @csrf
+                <input type="hidden" value="{{$Producto->idProducto}}" name="idProducto">
                 Nombre: <br>
                 <input type="text" name="prdNombre" value="{{old('prdNombre', $Producto->prdNombre)}}" class="form-control">
                 <br>

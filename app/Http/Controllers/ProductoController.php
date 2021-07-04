@@ -147,7 +147,7 @@ class ProductoController extends Controller
      */
     public function edit($idProducto)
     {
-        //Obtenemos los datos de la marca, categorias y marcas
+        //Obtenemos los datos del producto, categorias y marcas
         $Producto = Producto::with('relMarca', 'relCategoria')
                                                             ->find($idProducto);
         $categorias = Categoria::all();
@@ -170,9 +170,37 @@ class ProductoController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        //Capturamos el dato para flashearlo
+        $prdNombre          = $request->prdNombre;
+        $prdPrecio          = $request->prdPrecio;
+
+
+        $prdPresentacion    = $request->prdPresentacion;
+        $prdStock           = $request->prdStock;
+        $prdImagen          = $request->prdImagen;
+
+       //Validamos los datos del formulario
         $this->validarForm($request);
         $this->subirImagen($request);
+        //Obtenemos el producto por el ID
+        $Producto = Producto::find($request->idProducto);
+        //Modificamos los datos
+        $Producto -> prdNombre          = $prdNombre;
+        $Producto -> prdPrecio          = $prdPrecio;
+        
+
+        $Producto -> prdPresentacion    = $prdPresentacion;
+        $Producto -> prdStock           = $prdStock;
+        $Producto -> prdImagen          = $prdImagen;
+        //Guardamos en BD
+        $Producto->save();
+        //Redireccionamos con el mensaje OK
+        return redirect("adminProductos")
+                ->with(
+                        [
+                            'mensaje' => 'El producto '.$prdNombre.' fue modificada correctamente'
+                        ]
+                );
     }
 
     /**

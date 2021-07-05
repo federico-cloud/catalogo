@@ -47,13 +47,13 @@ class ProductoController extends Controller
     {
         $request -> validate(
                                 [
-                                    'prdNombre'         =>  'required|min:3|max:70',
-                                    'prdPrecio'         =>  'required|numeric|min:0',
-                                    'idMarca'           =>  'required',
-                                    'idCategoria'       =>  'required',
-                                    'prdPresentacion'   =>  'required|min:3|max:150',
-                                    'prdStock'          =>  'required|integer|min:1',
-                                    'prdImagen'         =>  'mimes:jpg,jpeg,png,gif,svg,webp|max:2048'
+                                    'prdNombre'                 =>  'required|min:3|max:70',
+                                    'prdPrecio'                 =>  'required|numeric|min:0',
+                                    'idMarca'                   =>  'required',
+                                    'idCategoria'               =>  'required',
+                                    'prdPresentacion'           =>  'required|min:3|max:150',
+                                    'prdStock'                  =>  'required|integer|min:1',
+                                    'prdImagen'                 =>  'mimes:jpg,jpeg,png,gif,svg,webp|max:2048'
                                 ],
                                 [
                                     'prdNombre.required'        =>  'Complete el campo Nombre',
@@ -148,8 +148,7 @@ class ProductoController extends Controller
     public function edit($idProducto)
     {
         //Obtenemos los datos del producto, categorias y marcas
-        $Producto = Producto::with('relMarca', 'relCategoria')
-                                                            ->find($idProducto);
+        $Producto = Producto::with('relMarca', 'relCategoria')->find($idProducto);
         $categorias = Categoria::all();
         $marcas = Marca::all();
         return view('modificarProducto', [
@@ -170,37 +169,32 @@ class ProductoController extends Controller
      */
     public function update(Request $request)
     {
+        //Obtenemos el producto por el ID
+        $Producto = Producto::find($request->idProducto);
         //Capturamos el dato para flashearlo
         $prdNombre          = $request->prdNombre;
-        $prdPrecio          = $request->prdPrecio;
-
-
-        $prdPresentacion    = $request->prdPresentacion;
-        $prdStock           = $request->prdStock;
-        $prdImagen          = $request->prdImagen;
 
        //Validamos los datos del formulario
         $this->validarForm($request);
         $this->subirImagen($request);
-        //Obtenemos el producto por el ID
-        $Producto = Producto::find($request->idProducto);
-        //Modificamos los datos
-        $Producto -> prdNombre          = $prdNombre;
-        $Producto -> prdPrecio          = $prdPrecio;
-        
 
-        $Producto -> prdPresentacion    = $prdPresentacion;
-        $Producto -> prdStock           = $prdStock;
-        $Producto -> prdImagen          = $prdImagen;
+        //Modificamos los datos
+        $Producto -> prdNombre          = $request->prdNombre;
+        $Producto -> prdPrecio          = $request->prdPrecio;
+        $Producto -> idMarca            = $request->idMarca;  
+        $Producto -> idCategoria        = $request->idCategoria;
+        $Producto -> prdPresentacion    = $request->prdPresentacion;
+        $Producto -> prdStock           = $request->prdStock;
+        $Producto -> prdImagen          = $request->prdImagen;
         //Guardamos en BD
         $Producto->save();
         //Redireccionamos con el mensaje OK
         return redirect("adminProductos")
-                ->with(
-                        [
-                            'mensaje' => 'El producto '.$prdNombre.' fue modificada correctamente'
-                        ]
-                );
+            ->with(
+                    [
+                        'mensaje' => 'El producto '.$prdNombre.' fue modificada correctamente'
+                    ]
+            );
     }
 
     /**

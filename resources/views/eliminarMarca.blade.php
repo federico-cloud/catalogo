@@ -24,5 +24,11 @@
                 </a>
             </form>
         </div>
-
+        <script>
+            Swal.fire(
+                'Advertencia',
+                'Si pulsa el botón "Confirmar baja", se eliminará la marca seleccionada.',
+                'warning'
+            )
+        </script>
     @endsection

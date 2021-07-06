@@ -1,5 +1,5 @@
 
-    <footer class="bg-dark fixed-bottom text-light text-center">
+    <footer class="fixed-bottom">
         (c) 2021 - Federico Galan -
     </footer>
 

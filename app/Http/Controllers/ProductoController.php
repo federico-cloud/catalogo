@@ -80,8 +80,14 @@ class ProductoController extends Controller
     private function subirImagen(Request $request)
     {
 
-        //Si no envian un archivo
+        //Si no envian un archivo metodo store()
         $prdImagen = 'noDisponible.jpg';
+
+        //Si no enviaron archivo metodo update()
+        if($request->has('imagenOriginal'))
+        {
+            $prdImagen = $request->imagenOriginal;
+        }
         //Si enviaron una imagen SUBIR ARCHIVO
         if ($request->file('prdImagen'))
         {
@@ -169,25 +175,30 @@ class ProductoController extends Controller
      */
     public function update(Request $request)
     {
-        //Obtenemos el producto por el ID
-        $Producto = Producto::find($request->idProducto);
         //Capturamos el dato para flashearlo
         $prdNombre          = $request->prdNombre;
-
-       //Validamos los datos del formulario
+        
+        //Validamos los datos del formulario
+        //Validamos datos
         $this->validarForm($request);
-        $this->subirImagen($request);
+        //Validamos imagen * si fue enviada
+        $prdImagen = $this->subirImagen($request);
+        
+        //Obtenemos el producto por el ID
+        $Producto = Producto::find($request->idProducto);
 
         //Modificamos los datos
-        $Producto -> prdNombre          = $request->prdNombre;
+        $Producto -> prdNombre          = $prdNombre;
         $Producto -> prdPrecio          = $request->prdPrecio;
         $Producto -> idMarca            = $request->idMarca;  
         $Producto -> idCategoria        = $request->idCategoria;
         $Producto -> prdPresentacion    = $request->prdPresentacion;
         $Producto -> prdStock           = $request->prdStock;
-        $Producto -> prdImagen          = $request->prdImagen;
+        $Producto -> prdImagen          = $prdImagen;
+
         //Guardamos en BD
         $Producto->save();
+
         //Redireccionamos con el mensaje OK
         return redirect("adminProductos")
             ->with(

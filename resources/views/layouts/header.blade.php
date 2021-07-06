@@ -23,7 +23,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav m-auto bg-dark" >
-                    <a class="nav-item nav-link" href="#">Inicio</a>
+                    <a class="nav-item nav-link" href="/portada">Inicio</a>
                     <a class="nav-item nav-link" href="/adminMarcas">Marcas</a>
                     <a class="nav-item nav-link" href="/adminCategorias">Categorias</a>
                     <a class="nav-item nav-link" href="/adminProductos">Productos</a>

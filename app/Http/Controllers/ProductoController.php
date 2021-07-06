@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+    public function getAll(){
+        //Obtenemos el listado de productos
+        $productos = Producto::with('relMarca', 'relCategoria')->paginate(6);
+        
+        //Retornamos la vista
+        return view('portada', [
+                                    'productos' => $productos
+                                ]
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -208,14 +219,38 @@ class ProductoController extends Controller
             );
     }
 
+    public function confirmarBaja($idProducto) 
+    {
+        $Producto = Producto::with('relMarca', 'relCategoria')->find($idProducto);
+
+        return view('eliminarProducto', [
+                                            'Producto' => $Producto
+                                        ]
+        );
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(Request $request)
     {
-        //
+        //Capturamos los datos
+        $prdNombre = $request->prdNombre;
+        $idProducto= $request->idProducto;
+
+        //Borramos de la BD
+        Producto::destroy($idProducto);
+
+        return redirect('/adminProductos')
+            ->with(
+                    [
+                        'mensaje' => 'Producto: '.$prdNombre.' eliminado correctamente'
+                    ]
+            );
+
+
     }
 }

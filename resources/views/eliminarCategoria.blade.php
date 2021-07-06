@@ -11,8 +11,8 @@
                 {{ $Categoria->catNombre }}
             </span>
             <form action="/eliminarCategoria" method="post">
-        @method('delete')
-        @csrf
+                @method('delete')
+                @csrf
                 <input type="hidden" name="idCategoria" value="{{ $Categoria->idCategoria }}">
                 <input type="hidden" name="catNombre" value="{{ $Categoria->catNombre }}">
                 <button class="btn btn-danger btn-block my-3">
@@ -23,5 +23,12 @@
                 </a>
             </form>
         </div>
-
+        
+        <script>
+            Swal.fire(
+                'Advertencia',
+                'Si pulsa el botón "Confirmar baja", se eliminará la categoría seleccionada.',
+                'warning'
+            )
+        </script>
     @endsection

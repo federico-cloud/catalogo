@@ -37,14 +37,14 @@ class CategoriaController extends Controller
     private function validarForm(Request $request)
     {
         $request = $request
-                        ->validate  (
-                                        [
-                                                'catNombre'             =>  'required | min:2'
-                                        ],
-                                        [   
-                                                'catNombre.required'    =>  'El nombre de la categoria es obligatorio.',
-                                                'catNombre.min'         =>  'El nombre de la categoria debe tener al menos 2 caracteres.'
-                                        ]
+            ->validate  (
+                            [
+                                    'catNombre'             =>  'required | min:2'
+                            ],
+                            [   
+                                    'catNombre.required'    =>  'El nombre de la categoria es obligatorio.',
+                                    'catNombre.min'         =>  'El nombre de la categoria debe tener al menos 2 caracteres.'
+                            ]
         );
     }
 
@@ -141,16 +141,16 @@ class CategoriaController extends Controller
         //Verificamos si hay productos en la categoria
         if ( $this->productoPorCategoria($idCategoria) == 0)
         {
-            //Si no hay productos dentro de la cateegoria, la eliminamos
+            //Si no hay productos dentro de la categoria, la eliminamos
             return view('eliminarCategoria', ['Categoria' => $Categoria]);
         } 
             return redirect('adminCategorias')
-                                    ->with(
-                                            [
-                                                'mensaje'   => 'No se puede eliminar la cateogria '.$Categoria->catNombre.' ya que tiene productos relacionados',
-                                                'clase'     => 'danger'
-                                            ]
-                                    );
+                ->with(
+                        [
+                            'mensaje'   => 'No se puede eliminar la cateogria '.$Categoria->catNombre.' ya que tiene productos relacionados',
+                            'clase'     => 'danger'
+                        ]
+                );
     }
 
     /**
@@ -165,13 +165,13 @@ class CategoriaController extends Controller
         $catNombre      =   $request->catNombre;
         $idCategoria    =   $request->idCategoria;
         //Hacemos el delete con el id
-        Categoria::delete($idCategoria);
+        Categoria::destroy($idCategoria);
         //Retornamos la vista con mensaje de OK
-        return view('adminCategorias')
-                                ->with(
-                                        [
-                                            'mensaje' => 'La categoria: '.$catNombre.' fue eliminada correctamente'
-                                        ]
-                                );
+        return redirect('adminCategorias')
+            ->with(
+                    [
+                        'mensaje' => 'La categoria: '.$catNombre.' fue eliminada correctamente'
+                    ]
+            );
     }
 }

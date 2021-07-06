@@ -172,17 +172,15 @@ class MarcaController extends Controller
      */
     public function destroy(Request $request)
     {
-        //
-        $idMarca    =   $request  ->   idMarca;
-        $mkNombre   =   $request  ->   mkNombre; 
-        //Marca::where('idMarca', $idMarca)->delete();
+        $idMarca    = $request->idMarca;
+        $mkNombre   = $request->mkNombre;
+        # Producto::find($idProducto)->delete();
         Marca::destroy($idMarca);
-        
-        return redirect('adminMarcas')
-                            ->with(
-                                    [
-                                        'mensaje' => 'Marca: ' . $mkNombre . ' eliminada correctamente.'
-                                    ]
-                            );
+        return redirect('/adminMarcas')
+            ->with(
+                    [
+                        'mensaje' => 'Marca: '.$mkNombre.' eliminado correctamente'
+                    ]
+            );
     }
 }

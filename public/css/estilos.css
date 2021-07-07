@@ -1,102 +1,340 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 body{
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
 }
 
+header{
+    padding: 14px 0px;
+    background: #3b3a3a;
+}
+
+main{
+    padding: 10px 0px 80px 0px;
+}
+
+h1{
+    text-align: center;
+    width: 100%;
+    color:#fff;
+    background: #AE5CFF;
+    margin-bottom: 15px;
+    padding: 15px;
+    margin-top: 0;
+}
+
+th{
+    vertical-align: middle;
+    font-weight: 700;
+}
+
+footer{
+    padding: 34px 0px !important;
+    background: #3b3a3a;
+    text-align: center;
+    color: #fff;
+}
+
+/* ########################################################
+###########################################################
+################# MEDIA QUERIES ###########################
+*/
+@media(max-width: 576px){
+
     header{
-        padding: 14px 0px;
+        height: 10%;
+        width: 100%;
+        z-index: 10;
+        position: sticky;
+        top: 0;
         background: #3b3a3a;
+        display: flex;
+        align-items: center;
+        text-align: center;
     }
 
-    .nav-link{
-        color: #d8d8d8;
-        margin: 0px 10px;
-    }
-    .nav-link:hover{
-        color: #fff !important;
-        border-bottom: 2px solid #fff;
+    header img{
+        margin: 10px;
     }
 
-    main{
-        padding: 10px 0px 80px 0px;
+    .navbar{
+        padding: 0;
     }
 
-        h1{
-            margin-bottom: 30px;
-            border-left: 12px solid #ececec;
-            padding-left: 30px;
-        }
+    .navbar-toggler{
+        margin: 10px;
+        transition: all 0.5s ease-in-out;
+    }
 
-        th{
-            vertical-align: middle;
-            font-weight: 700;
-        }
-
-    footer{
-        padding: 34px 0px !important;
+    .navbar-collapse{
+        transition: all 0.5s linear;
         background: #3b3a3a;
+        height: 100vh;
+    }
+
+    .navbar-nav{
+        height: 100%;
+        width: 100%;
+    }
+
+    .nav-item{
+        border: none;
+        padding: 20px;
+        text-align: center;
+        font-size: 30px;
+        margin: 10px;
+    }
+
+    .nav-item:hover{
+        background: #707070;
+    }
+
+    h1{
+        font-size: 30px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .card{
+        margin: 20px auto;
+        margin-bottom: 10px;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card-title{
         text-align: center;
         color: #fff;
+        margin: 15px 0;
+        padding: 5px 10px;
+        font-size: 40px;
+        font-family: 'Montserrat', sans-serif;
+        background: #AE5CFF;
+        border: 2px solid #000000;
+        border-radius: 10px;
     }
 
-    /* ########################################################
-    ###########################################################
-    ################# MEDIA QUERIES ###########################
-    */
-    @media(max-width: 576px){
-
-        header{
-            height: 10%;
-            width: 100%;
-            position: fixed;
-            z-index: 10;
-            background: #3b3a3a;
-        }
-
-        header img{
-            margin: 10px;
-        }
-
-        .navbar{
-            padding: 0;
-        }
-
-        .navbar-toggler{
-            margin: 10px;
-        }
-
-        .navbar-collapse{
-            width: 100%;
-            height: 1000px;
-            transition: all 0.5s linear;
-            background: #3b3a3a;
-        }
-        .navbar-nav{
-            height: 100%;
-            width: 100%;
-        }
-
-        .nav-item{
-            border: none;
-            padding: 30px;
-            text-align: center;
-            font-size: 30px;
-        }
-        .card{
-            margin: 20px auto;
-            margin-bottom: 10px;
-        }
-        .card img{
-            border: none;
-            border-radius: none;
-        }
-        .card:hover{
-            background: #AE5CFF;
-            color: #fff;
-            transform:translateY(-10px);
-            transition: all 1.5s ease-in-out;
-            box-shadow: 1px 1px 5px #000000;
-        }
+    .card-text h5{
+        font-size: 25x;
+        font-family: 'Montserrat', sans-serif;
+        margin: 2px;
+        padding: 0;
+        color: #ae5cffb4;
     }
+
+    .card-text p{
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        color: #707070;
+    }
+
+    .card img{
+        width: auto;
+        height: auto;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card:hover{
+        transform:translateY(-5px);
+        transition: all 0.5s ease-in-out;
+        box-shadow: 1px 1px 5px #000000;
+    }
+
+    footer{
+        position: relative;
+        margin-top: 100px;
+        z-index: 50;
+    }
+}
+
+@media(min-width:577px) and (max-width:767px){
+    header{
+        height: 10%;
+        width: 100%;
+        z-index: 10;
+        position: sticky;
+        top: 0;
+        background: #3b3a3a;
+        display: flex;
+        align-items: center;
+    }
+
+    header img{
+        margin: 10px;
+    }
+
+    .nav-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        font-size: 25px;
+    }
+
+    .nav-item:hover{
+        background: #707070;
+        color: #AE5CFF;
+    }
+
+    h1{
+        font-size: 40px;
+        font-family: 'Montserrat', sans-serif;
+        box-shadow: 1px 1px 5px #000000;
+    }
+
+    .card{
+        margin: 20px auto;
+        margin-bottom: 10px;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card-title{
+        text-align: center;
+        color: #fff;
+        margin: 15px 0;
+        padding: 5px;
+        font-size: 40px;
+        font-family: 'Montserrat', sans-serif;
+        background: #AE5CFF;
+        border: 2px solid #000000;
+        border-radius: 10px;
+    }
+
+    .card-text h5{
+        font-size: 25px;
+        font-family: 'Montserrat', sans-serif;
+        margin: 2px;
+        padding: 0;
+        color: #ae5cffb4;
+    }
+
+    .card-text p{
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        color: #707070;
+    }
+
+    .card img{
+        height: 50%;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card:hover{
+        transform:translateY(-5px);
+        transition: all 0.5s ease-in-out;
+        box-shadow: 1px 1px 5px #000000;
+    }
+
+    footer{
+        margin-top: 100px;
+    }
+}
+
+@media(min-width:768px) and (max-width:991px){
+    header{
+        height: 10%;
+        width: 100%;
+        z-index: 10;
+        position: sticky;
+        top: 0;
+        background: #3b3a3a;
+        display: flex;
+        align-items: center;
+    }
+
+    header img{
+        margin: 10px;
+    }
+
+    .nav-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        font-size: 25px;
+    }
+
+    .nav-item:hover{
+        background: #707070;
+        color: #AE5CFF;
+    }
+
+    h1{
+        font-size: 40px;
+        font-family: 'Montserrat', sans-serif;
+        box-shadow: 1px 1px 5px #000000;
+    }
+
+    .card{
+        margin: 20px auto;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card-title{
+        text-align: center;
+        color: #fff;
+        margin: 15px 0;
+        padding: 0px;
+        font-size: 40px;
+        height: 50px;
+        font-family: 'Montserrat', sans-serif;
+        background: #AE5CFF;
+        border: 2px solid #000000;
+        border-radius: 10px;
+    }
+
+    .card-text h5{
+        text-align:justify;
+        width: auto;
+        display: inline-block;
+        font-size: 25px;
+        font-family: 'Montserrat', sans-serif;
+        margin: 2px;
+        padding: 0;
+        color: #ae5cffb4;
+    }
+
+    .card-text p{
+        text-align: right;
+        width: auto;
+        display: inline-block;
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        color: #707070;
+    }
+
+    .card img{
+        height: 50%;
+        border-radius: 0;
+        border: none;
+    }
+
+    .card:hover{
+        transform:translateY(-5px);
+        transition: all 0.5s ease-in-out;
+        box-shadow: 1px 1px 5px #AE5CFF;
+    }
+
+    footer{
+        margin-top: 100px;
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px){
+    
+}
+
+@media(min-width: 1200px) and (max-width: 4000px){
+
+}
